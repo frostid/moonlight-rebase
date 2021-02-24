@@ -34,7 +34,7 @@ send_msg(){
 	print "${1}" green
 	curl -s -X POST https://api.telegram.org/bot"${bot_token}"/sendMessage \
 		-d parse_mode="Markdown" \
-		-d chat_id="${GROUP_ID}" \
+		-d chat_id="${chat_id}" \
 		-d text="${1}"
 }
 
@@ -88,7 +88,7 @@ gen_toolchain(){
 	print "Cloning toolchain files..." green
 	if [ $TOOLCHAIN == "clang" ]
 	then
-		git clone --depth=1 https://github.com/kdrag0n/proton-clang clang
+		git clone --depth=1 https://github.com/GengKapak/GengKapak-clang clang
 	else
 		git clone --depth=1 https://github.com/chips-project/aarch64-elf gcc64
 		git clone --depth=1 https://github.com/chips-project/arm-eabi gcc32
