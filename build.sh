@@ -2,13 +2,13 @@
 
 export KERNELNAME=Moonlight
 
-export LOCALVERSION=Ishigami-v2.1
+export LOCALVERSION=Hoshi-v2.2-TEST
 
-export KBUILD_BUILD_USER=frost
+export KBUILD_BUILD_USER=frost_id
 
 export KBUILD_BUILD_HOST=otaku
 
-export TOOLCHAIN=clang
+export TOOLCHAIN=clang 
 
 export DEVICES=whyred,tulip,lavender,a26x
 

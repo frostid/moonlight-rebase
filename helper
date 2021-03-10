@@ -19,7 +19,7 @@ make_build(){
 				CROSS_COMPILE=aarch64-linux-gnu- \
 				CROSS_COMPILE_ARM32=arm-linux-gnueabi-
 	else
-		export CROSS_COMPILE=$(pwd)/gcc64/bin/aarch64-elf-
+		export CROSS_COMPILE=$(pwd)/gcc64/bin/aarch64-linux-gnu
 		export CROSS_COMPILE_ARM32=$(pwd)/gcc32/bin/arm-eabi-
 		make O=out ARCH=arm64 $1
 		make -j$(nproc --all) O=out ARCH=arm64
@@ -42,13 +42,13 @@ send_pesan(){
 	print "${1}" green
 	curl -s -X POST https://api.telegram.org/bot"${bot_token}"/sendMessage \
 		-d parse_mode="Markdown" \
-		-d chat_id="${chat_id}" \
+		-d chat_id="${CI_ID}" \
 		-d text="${1}"
 }
 
 send_file(){
 	print "Sending file..." green
-	curl -F chat_id="${chat_id}" \
+	curl -F chat_id="${CI_ID}" \
 		-F caption="✅ Build succesfully! | DEVICE: ${type} | Linux version : $(make kernelversion) | Compiler : $KBUILD_COMPILER_STRING" \
 		-F document=@"${1}" \
 		 https://api.telegram.org/bot"${bot_token}"/sendDocument
@@ -90,7 +90,7 @@ gen_toolchain(){
 	then
 		git clone --depth=1 https://github.com/kdrag0n/proton-clang clang
 	else
-		git clone --depth=1 https://github.com/chips-project/aarch64-elf gcc64
+		git clone --depth=1 https://github.com/najahiiii/aarch64-linux-gnu gcc64
 		git clone --depth=1 https://github.com/chips-project/arm-eabi gcc32
 	fi
 	git clone --depth=1 https://github.com/frostid/AnyKernel3 -b xiaomi anykernel
